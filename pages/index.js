@@ -2,8 +2,8 @@ import fs from "fs";
 import glob from "glob-promise";
 import matter from "gray-matter";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 import path from "path";
 import SiteLayout from "../components/Layouts/SiteLayout";
 
@@ -38,6 +38,27 @@ export const getStaticProps = async () => {
   };
 };
 
+const portfolioData = [
+  {
+    title: "Portfolio Item 1",
+    description:
+      "This is a longer description for the first portfolio item. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia! Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia!",
+    imgUrl: "https://source.unsplash.com/collection/your_collection_id_here/1",
+  },
+  {
+    title: "Portfolio Item 2",
+    description:
+      "This is a longer description for the second portfolio item. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia! Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia!",
+    imgUrl: "https://source.unsplash.com/collection/your_collection_id_here/2",
+  },
+  {
+    title: "Portfolio Item 3",
+    description:
+      "This is a longer description for the second portfolio item. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia! Lorem ipsum dolor sit amet, consectetur adipisicing elit. At labore inventore nostrum maxime impedit, reiciendis veniam delectus corporis vitae porro natus ratione tempore pariatur cum expedita minus ipsum doloribus officia!",
+    imgUrl: "https://source.unsplash.com/collection/your_collection_id_here/3",
+  },
+];
+
 const Articles = ({ articles }) => {
   return (
     <>
@@ -55,7 +76,7 @@ const Articles = ({ articles }) => {
             </h2>
           </div>
         </header>
-        <ul className="articles container mx-auto mb-12">
+        {/* <ul className="articles container mx-auto mb-12">
           {articles.map((article) => (
             <li key={article.slug} className="article">
               <header className="article-item-header mt-8">
@@ -79,7 +100,32 @@ const Articles = ({ articles }) => {
               </header>
             </li>
           ))}
-        </ul>
+        </ul> */}
+        <div className="container mx-auto mt-20 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-1 gap-x-12 gap-y-20">
+            {portfolioData.map((item, index) => (
+              <div
+                key={index}
+                className="flex flex-col md:flex-row md:items-center"
+              >
+                <div className="md:w-1/2">
+                  <h2 className="text-xl font-bold mb-2">{item.title}</h2>
+                  <p className="mb-4 w-3/4">{item.description}</p>
+                  <button className="bg-black text-white rounded px-4 py-2">
+                    View Details
+                  </button>
+                </div>
+                <div className="md:w-1/2">
+                  <img
+                    className="w-full h-96 md:h-[320px] object-cover rounded-md"
+                    src={item.imgUrl}
+                    alt={item.title}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </>
   );
